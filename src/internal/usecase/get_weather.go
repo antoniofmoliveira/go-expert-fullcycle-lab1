@@ -6,6 +6,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
+	neturl "net/url"
 	"os"
 	"strings"
 
@@ -115,8 +116,8 @@ func GetWeather(ctx context.Context, cep string) (temps dto.TempResponse, status
 
 	url := "http://api.weatherapi.com/v1/current.json?key={{key}}&q={{city}}&aqi=no"
 	url = strings.Replace(url, "{{key}}", api_key, 1)
-	url = strings.Replace(url, "{{city}}", rcep.City, 1)
-	url = strings.Replace(url, " ", "%20", -1)
+	url = strings.Replace(url, "{{city}}", neturl.QueryEscape(rcep.City), 1)
+	// url = strings.Replace(url, " ", "%20", -1)
 
 	slog.Info(url)
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -164,7 +165,7 @@ func GetWeather(ctx context.Context, cep string) (temps dto.TempResponse, status
 
 	case http.StatusServiceUnavailable:
 		return dto.TempResponse{}, 503, "Service Unavailable", errors.New("service unavailable")
-		
+
 	default:
 		return dto.TempResponse{}, 500, "Internal Server Error", errors.New("unknown error")
 	}
