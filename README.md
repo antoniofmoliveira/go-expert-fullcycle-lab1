@@ -2,9 +2,20 @@
 
 ## Solução:
 
+Endereço na google cloud:
+
 <https://lab-1-565757068997.us-central1.run.app/?cep=39408078>
 
-Objetivo: Desenvolver um sistema em Go que receba um CEP, identifica a cidade e retorna o clima atual (temperatura em graus celsius, fahrenheit e kelvin). Esse sistema deverá ser publicado no Google Cloud Run.
+## Atenção:
+
+    para executar localmente, deve-se adicionar a API KEY do WeatherAPI no Dockerfile.
+
+    ENV API_KEY=000000000...
+
+
+## Objetivo:
+
+ Desenvolver um sistema em Go que receba um CEP, identifica a cidade e retorna o clima atual (temperatura em graus celsius, fahrenheit e kelvin). Esse sistema deverá ser publicado no Google Cloud Run.
 
 ## Requisitos:
 
